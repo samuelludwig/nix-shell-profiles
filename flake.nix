@@ -15,14 +15,11 @@
   flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = (import nixpkgs { inherit system; });
-
-    mkEnvironment = packageSet: pkgs.mkShell {
-      buildInputs = import packageSet { inherit pkgs; };
-    };
+    utils = (import ./utils.nix { inherit pkgs; });
 
     environments = {
-      spreadsheets = mkEnvironment ./package-sets/record-keeping.nix;
-      phpDev = mkEnvironment ./package-sets/phpDev.nix;
+      spreadsheets = utils.mkEnvironment ./package-sets/record-keeping.nix;
+      phpDev = utils.mkEnvironment ./package-sets/php-dev.nix;
     };
 
     output = rec {
