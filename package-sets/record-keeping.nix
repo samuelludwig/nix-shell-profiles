@@ -2,4 +2,5 @@
 with pkgs;
 [
   sc-im
+  xsv
 ]
